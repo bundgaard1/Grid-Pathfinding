@@ -1,18 +1,16 @@
 #pragma once
-#include "Grid.h"
 
-class Cell
-{
-public:
-	Cell(int x, int y);
-	void draw_cell(sf::RenderWindow* ptr_window);
+#include <SFML/Graphics.hpp>
+#include <memory>
+#include <vector>
 
-private:
-	Grid* ptr_grid;
-	int m_x, m_y;
-	float m_f, m_g, m_h;
-	bool m_wall = false;
+typedef enum e_cell_state { Normal, Wall, Start, Goal} cell_state;
 
+class Cell {
+   public:
+   Cell();
+    Cell(int x, int y);
+
+    int m_x, m_y;
+    cell_state m_state;
 };
-
-

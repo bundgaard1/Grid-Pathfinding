@@ -1,31 +1,25 @@
 #pragma once
 
-#include "Grid.h"
-#include <vector>
 #include <SFML/Graphics.hpp>
-#include <memory>
-#include <iostream>
-#include <time.h>
-#include <math.h>
-#include <stdlib.h>
 
-class UI
-{
-public:
+#include "GridController.h"
 
-	UI(sf::RenderWindow* window, sf::Font font, Grid* grid);
-	void drawUI();
+class UI {
+   public:
+    UI(GridController& gridCont, sf::Vector2f pos);
+    void drawUI(sf::RenderWindow& window);
 
-	sf::RenderWindow* m_window;
-	Grid* m_grid;
+   private:
+    void draw_text(sf::RenderWindow& window, const sf::String text);
+    bool load_font(const std::string& fontPath);
 
-	
-	static constexpr float m_infoHeight = 40;
-	static constexpr float m_y = 50;
-	static constexpr float m_x = 1400;
-	static constexpr int m_textSize = 26;
-	const sf::Color m_textColor = sf::Color::White;
-	sf::Font m_font;
+    GridController& m_gridController;
+    sf::Vector2f m_pos;
+    sf::Vector2f m_margin;
 
+
+    float m_infoHeight;
+    int m_text_count;
+
+    sf::Font m_font;
 };
-
