@@ -92,3 +92,13 @@
 
 //     std::vector<pos> m_openSet;
 //    std::vector<pos> m_closedSet;
+
+// float Grid::heuristic(Cell a, Cell b) {
+//     float dx = abs((float)(a.m_x - b.m_x));
+//     float dy = abs((float)(a.m_y - b.m_y));
+//     if (m_diagonals) {
+//         return sqrt(dx * dx + dy * dy);
+//     } else {
+//         return dx + dy;
+//     }
+// }

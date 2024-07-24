@@ -6,30 +6,37 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+#include "types.h"
 
 #include "Cell.h"
 
-typedef sf::Vector2u pos ;
-
 class Grid {
    public:
-    Grid(sf::Vector2u gridSize);
-    sf::Vector2u Size();
-    Cell* getCell(pos p);
+    Grid(sf::Vector2i gridSize);
+    sf::Vector2i Size();
+    Cell* getCell(Pos p);
+    Pos getStart() { return m_start; }
+    Pos getEnd() { return m_end; }
+    std::vector<Pos> neighbors_for_cell(Pos cell);
 
    private:
-   // std::vector<Cell> neighbors_for_cell(const Cell& cell);
-    float heuristic(Cell a, Cell b);
+    bool cell_is_valid(Pos p);
 
     struct Size {
-        uint cols;
-        uint rows;
+        int cols;
+        int rows;
     } m_size;
 
+    const Pos m_neighborDirs[4] = {
+        {-1, 0},{0, -1}, {0, 1},  {1, 0},
+    };
+
     bool m_diagonals;
+    
+
 
     // outer vector is x, inner vector is y
     std::vector<std::vector<Cell>> m_cells;
-    pos m_start;
-    pos m_end;
+    Pos m_start;
+    Pos m_end;
 };

@@ -19,7 +19,7 @@ The project uses CMake, use the run.sh script to compile and run the project.
 - [x] Refactor and clean the code.
 - [x] Make the grid show.
 - [ ] Create interface for showing the search algorithm results
-- [ ] Implment common alogrithms
+- [ ] Implement common alogrithms
     - [ ] Implement A* algorithm
     - [ ] Implement Dijkstra algorithm
     - [ ] Implement Breadth First S algorithm

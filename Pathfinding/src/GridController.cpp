@@ -1,7 +1,6 @@
 #include "GridController.h" 
-#include "Grid.h"
 
-GridController::GridController(Grid& grid) : m_grid(grid) {
+GridController::GridController(Grid& grid, Search& search) : m_grid(grid), m_search(search) {
     m_paused = true;
     m_done = false;
     m_win = false;
@@ -18,7 +17,7 @@ void GridController::handleEvent(sf::Event& event) {
                 clear();
                 break;
             case (sf::Keyboard::Space):
-                pause();
+                m_search.search();
                 break;
             case (sf::Keyboard::T):
                 try_again();

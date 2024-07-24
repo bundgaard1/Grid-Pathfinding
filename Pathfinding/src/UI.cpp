@@ -18,11 +18,10 @@ UI::UI(GridController& gridCont, sf::Vector2f pos) : m_gridController(gridCont),
 
 void UI::drawUI(sf::RenderWindow& window) {
     m_text_count = 0;
-    
+
     draw_text(window, "C: Clear");
     draw_text(window, "R: Reset");
     draw_text(window, "T: Try again");
-    draw_text(window, "D: Diagonals");
 
     // draw_text(window, text, m_grid.m_diagonals ? "On" : "Off", {m_x + 180, m_y + 3 * m_infoHeight});
 

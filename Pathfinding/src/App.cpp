@@ -7,15 +7,17 @@
 #include "GridController.h"
 #include "GridView.h"
 #include "UI.h"
+#include "GridSearch.h"
 
 void App::Run() {
     sf::RenderWindow window(sf::VideoMode(1200, 900), "Pathfinder", sf::Style::Close | sf::Style::Titlebar);
 
     Grid grid = Grid({20, 15});
     
-    GridController grid_controller = GridController(grid);
+    Search search = Search(grid);   
+    GridController grid_controller = GridController(grid, search);
     UI ui = UI(grid_controller, {900, 0});
-    GridView view = GridView(grid, {900, 900});
+    GridView view = GridView(grid, search, {900, 900});
 
 
     while (window.isOpen()) {
@@ -27,9 +29,11 @@ void App::Run() {
         }
 
         window.clear(sf::Color(50, 50, 50));
-
         view.draw_grid(window);
+        view.draw_search(window);
+
         ui.drawUI(window);
+
         window.display();
     }
 
