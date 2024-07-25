@@ -22,6 +22,6 @@ The project uses CMake, use the run.sh script to compile and run the project.
 - [ ] Implement common alogrithms
     - [ ] Implement A* algorithm
     - [ ] Implement Dijkstra algorithm
-    - [ ] Implement Breadth First S algorithm
+    - [ ] Implement Breadth First Search algorithm
     - [ ] Implement Depth First Search algorithm
 

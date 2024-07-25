@@ -40,21 +40,18 @@ std::vector<Pos> Grid::neighbors_for_cell(Pos cell) {
     std::vector<Pos> neighbors;
 
     for (int i = 0; i < 4; i++) {
-        Pos neighbor = {cell.x + m_neighborDirs[i].x, cell.y + m_neighborDirs[i].y};
+        Pos neighbor_pos = {cell.x + m_neighborDirs[i].x, cell.y + m_neighborDirs[i].y};
 
-        if (cell_is_valid(neighbor) 
-            && getCell(neighbor)->m_state != cell_state::Wall){
-            neighbors.push_back(neighbor);
+        if (cell_is_valid(neighbor_pos) 
+            && getCell(neighbor_pos)->m_state != cell_state::Wall){
+            neighbors.push_back(neighbor_pos);
         }
     }
     
-
     return neighbors;
 }
 
 bool Grid::cell_is_valid(Pos p) {
     return p.x >= 0 && p.x < m_size.cols && p.y >= 0 && p.y < m_size.rows;
 }
-
-
 

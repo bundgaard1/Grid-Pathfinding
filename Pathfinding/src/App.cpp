@@ -7,17 +7,17 @@
 #include "GridController.h"
 #include "GridView.h"
 #include "UI.h"
-#include "GridSearch.h"
+#include "DFSSearch.h"
 
 void App::Run() {
     sf::RenderWindow window(sf::VideoMode(1200, 900), "Pathfinder", sf::Style::Close | sf::Style::Titlebar);
 
     Grid grid = Grid({20, 15});
     
-    Search search = Search(grid);   
-    GridController grid_controller = GridController(grid, search);
-    UI ui = UI(grid_controller, {900, 0});
-    GridView view = GridView(grid, search, {900, 900});
+    DFSSearch search(grid);   
+    GridController grid_controller(grid, search);
+    UI ui(grid_controller, {900, 0});
+    GridView view(grid, search, {900, 900});
 
 
     while (window.isOpen()) {

@@ -4,20 +4,21 @@
 
 #include "Cell.h"
 #include "Grid.h"
-#include "GridSearch.h"
+#include "GridSearchBase.h"
 
 class GridView {
    public:
-    GridView(Grid& grid, Search& search, sf::Vector2f viewport_size);
+    GridView(Grid& grid, BaseSearch& search, sf::Vector2f viewport_size);
     void    draw_grid(sf::RenderWindow& ptr_window) const;
     void    draw_search(sf::RenderWindow& ptr_window) const;
 
    private:
     void    draw_cell(sf::RenderWindow& ptr_window, const Cell& cell) const;
     void    draw_point_on_cell(sf::RenderWindow& ptr_window, const Pos& pos, sf::Color color) const;
+    void    draw_line_cell_to_cell(sf::RenderWindow& ptr_window, const Pos& start, const Pos& end, sf::Color color) const;
 
     Grid& m_grid;
-    Search& m_search;
+    BaseSearch& m_search;
     sf::Vector2f m_viewport_size;
     float m_cell_size;
 

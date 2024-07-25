@@ -1,6 +1,6 @@
 #include "GridController.h" 
 
-GridController::GridController(Grid& grid, Search& search) : m_grid(grid), m_search(search) {
+GridController::GridController(Grid& grid, BaseSearch& search) : m_grid(grid), m_search(search) {
     m_paused = true;
     m_done = false;
     m_win = false;
@@ -17,6 +17,7 @@ void GridController::handleEvent(sf::Event& event) {
                 clear();
                 break;
             case (sf::Keyboard::Space):
+
                 m_search.search();
                 break;
             case (sf::Keyboard::T):
@@ -35,12 +36,11 @@ void GridController::handleEvent(sf::Event& event) {
 
 void GridController::reset() {
     srand(time(NULL));
-
     return;
 }
 
 void GridController::clear() {
-    reset();
+    m_search.reset();
 }
 
 void GridController::pause() {
@@ -48,8 +48,6 @@ void GridController::pause() {
 }
 
 void GridController::try_again() {
-
-
   return;
 }
 
