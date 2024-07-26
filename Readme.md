@@ -1,5 +1,4 @@
 # Grid Pathfinding 
-
 Pathfinding in a grid-medium
 
 ## Description
