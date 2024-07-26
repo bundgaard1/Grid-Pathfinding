@@ -1,5 +1,7 @@
 # Grid Pathfinding 
 
+Path finding in a grid medium using algorithms.
+
 ## Description
 
 This project is a small demo of pathfinding algorithms in a grid medium. The project is a work in progress and is being developed as a hobby project. The project is developed in C++ and uses the SFML library for the graphics.
