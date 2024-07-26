@@ -6,7 +6,7 @@
 #include <iostream>
 #include <memory>
 #include <vector>
-#include "types.h"
+#include "Pos.h"
 
 #include "Cell.h"
 
@@ -21,6 +21,7 @@ class Grid {
 
    private:
     bool cell_is_valid(Pos p);
+    void generate_cells(float cell_wall_chance);
 
     struct Size {
         int cols;
@@ -33,8 +34,6 @@ class Grid {
 
     bool m_diagonals;
     
-
-
     // outer vector is x, inner vector is y
     std::vector<std::vector<Cell>> m_cells;
     Pos m_start;

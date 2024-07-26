@@ -10,14 +10,7 @@ Grid::Grid(sf::Vector2i gridSize) : m_diagonals(false) {
     srand(time(NULL));
 
     // Cells
-    m_cells.resize(m_size.cols, std::vector<Cell>(m_size.rows));
-
-    for (int x = 0; x < m_size.cols; x++) {
-        for (int y = 0; y < m_size.rows; y++) {
-            Cell rawCell(x, y);
-            m_cells[x][y] = rawCell;
-        }
-    }
+    generate_cells(0.05);
 
     // Start and end
     m_start = {0,0};
@@ -55,3 +48,19 @@ bool Grid::cell_is_valid(Pos p) {
     return p.x >= 0 && p.x < m_size.cols && p.y >= 0 && p.y < m_size.rows;
 }
 
+
+void Grid::generate_cells(float cell_wall_chance) {
+
+    m_cells.clear();
+    m_cells.resize(m_size.cols, std::vector<Cell>(m_size.rows));
+
+    for (int x = 0; x < m_size.cols; x++) {
+        for (int y = 0; y < m_size.rows; y++) {
+            cell_state state = (rand() % 100 < cell_wall_chance * 100) 
+                                ? cell_state::Wall 
+                                : cell_state::Normal;
+            Cell cell(x, y, state);
+            m_cells[x][y] = cell;
+        }
+    }
+}

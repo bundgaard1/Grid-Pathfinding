@@ -8,9 +8,10 @@ typedef enum e_cell_state { Normal, Wall, Start, Goal} cell_state;
 
 class Cell {
    public:
-   Cell();
-    Cell(int x, int y);
+    Cell();
+    Cell(int x, int y, cell_state state);
 
-    int m_x, m_y;
     cell_state m_state;
+    int m_x, m_y;
+
 };

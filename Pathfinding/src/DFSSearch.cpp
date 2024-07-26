@@ -16,6 +16,7 @@ void DFSSearch::search() {
     Pos End = m_grid.getEnd(); 
     if (Current.x == End.x && Current.y == End.y) {
         m_done = true;
+        m_closedSet.push_back(Current);
         return;
     }
 
@@ -40,11 +41,6 @@ void DFSSearch::reset() {
     init();
     return;
 }
-
-bool DFSSearch::is_done() {
-    return m_done;
-}
-
 
 std::vector<Pos> DFSSearch::get_openSet()  {
     return m_openSet;

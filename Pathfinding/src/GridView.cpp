@@ -70,6 +70,7 @@ void GridView::draw_line_cell_to_cell(sf::RenderWindow& ptr_window, const Pos& s
         sf::Vertex(sf::Vector2f(start.x * m_cell_size + m_cell_size / 2, start.y * m_cell_size + m_cell_size / 2), color),
         sf::Vertex(sf::Vector2f(end.x * m_cell_size + m_cell_size / 2, end.y * m_cell_size + m_cell_size / 2), color)
     };
+    
 
     ptr_window.draw(line, 2, sf::Lines);
 } 

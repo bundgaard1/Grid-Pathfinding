@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Grid.h"
-#include "types.h"
+#include "Pos.h"
 #include <set>
 #include <queue>
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Grid.h"
-#include "types.h"
+#include "Pos.h"
 #include "GridSearchBase.h"
 #include <set>
 #include <queue>
@@ -16,7 +16,6 @@ class DFSSearch : public BaseSearch {
     void init() override;
     void search() override; 
     void reset() override; 
-    bool is_done();
 
     std::vector<Pos> get_openSet() override;
     std::vector<Pos> get_closedSet()override ;
