@@ -3,15 +3,21 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <vector>
+#include "Pos.h"
 
-typedef enum e_cell_state { Normal, Wall, Start, Goal} cell_state;
+enum class CellState { Normal, Wall, Start, Goal} ;
 
 class Cell {
    public:
     Cell();
-    Cell(int x, int y, cell_state state);
+    Cell(int x, int y, CellState state);
+    Pos getPos() const;
+    CellState getState() const;
+    void setState(CellState state);
 
-    cell_state m_state;
-    int m_x, m_y;
+   private:
+    Pos m_pos;
+    CellState m_state;
+    
 
 };

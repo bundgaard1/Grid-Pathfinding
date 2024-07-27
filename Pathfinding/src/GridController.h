@@ -15,8 +15,8 @@ class GridController {
 
     // Other control-related methods and properties
    private:
-    Grid& m_grid;
-    BaseSearch& m_search;
+    Grid& r_grid;
+    BaseSearch& r_search;
 
     bool m_done = false;
     bool m_win = false;

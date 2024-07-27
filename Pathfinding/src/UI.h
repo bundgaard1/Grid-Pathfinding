@@ -7,13 +7,13 @@
 class UI {
    public:
     UI(GridController& gridCont, sf::Vector2f pos);
-    void drawUI(sf::RenderWindow& window);
+    void drawUI(sf::RenderWindow& windowReference);
 
    private:
-    void draw_text(sf::RenderWindow& window, const sf::String text);
+    void draw_text(sf::RenderWindow& windowReference, const sf::String text);
     bool load_font(const std::string& fontPath);
 
-    GridController& m_gridController;
+    GridController& r_gridController;
     sf::Vector2f m_pos;
     sf::Vector2f m_margin;
 

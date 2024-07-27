@@ -1,15 +1,24 @@
 #include "Cell.h"
 
 Cell::Cell() {
-    m_x = 0;
-    m_y = 0;
-    m_state = cell_state::Normal;
+    m_pos = Pos(0, 0);
+    m_state = CellState::Normal;
 }
 
-Cell::Cell(int x, int y, cell_state state) {
-    m_x = x;
-    m_y = y;
+Cell::Cell(int x, int y, CellState state) {
+    m_pos = Pos(x, y);
     m_state = state;
 }
 
+Pos Cell::getPos() const {
+    return m_pos;
+}   
+
+CellState Cell::getState() const {
+    return m_state;
+}
+
+void Cell::setState(CellState state) {
+    m_state = state;
+} 
 

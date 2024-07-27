@@ -7,7 +7,7 @@
 
 class BaseSearch {
     public:
-        BaseSearch(Grid& grid) : m_grid(grid) {};
+        BaseSearch(Grid& grid) : r_grid(grid) {};
         virtual void init() = 0;
         virtual void search() = 0; 
         virtual void reset() = 0; 
@@ -20,6 +20,6 @@ class BaseSearch {
         virtual std::vector<Pos> get_path() = 0;
     
     protected:
-        Grid& m_grid;
+        Grid& r_grid;
         bool m_done = false;
 };

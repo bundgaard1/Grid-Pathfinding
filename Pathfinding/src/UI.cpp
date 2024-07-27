@@ -8,7 +8,7 @@
 #include <memory>
 #include <vector>
 
-UI::UI(GridController& gridCont, sf::Vector2f pos) : m_gridController(gridCont), m_pos(pos) {
+UI::UI(GridController& gridCont, sf::Vector2f pos) : r_gridController(gridCont), m_pos(pos) {
     m_margin = {50, 50};
     m_infoHeight = 40.0f;
     m_text_count = 0;
@@ -23,20 +23,20 @@ void UI::drawUI(sf::RenderWindow& window) {
     draw_text(window, "R: Reset");
     draw_text(window, "T: Try again");
 
-    // draw_text(window, text, m_grid.m_diagonals ? "On" : "Off", {m_x + 180, m_y + 3 * m_infoHeight});
+    // draw_text(window, text, r_grid.m_diagonals ? "On" : "Off", {m_x + 180, m_y + 3 * m_infoHeight});
 
     // Space - pause
-    // const sf::String ptext = m_grid.m_paused ? "Paused" : "Running";
+    // const sf::String ptext = r_grid.m_paused ? "Paused" : "Running";
     // draw_text(window,text, "Space: " + ptext, {m_x, m_y + 4 * m_infoHeight});
 }
 
-void UI::draw_text(sf::RenderWindow& window, const sf::String s) {
+void UI::draw_text(sf::RenderWindow& window, const sf::String text) {
     sf::Text sf_text;
     sf_text.setFont(m_font);
     sf_text.setCharacterSize(26);
     sf_text.setFillColor(sf::Color::White);
     sf_text.setPosition(m_pos + m_margin + (sf::Vector2f){0, m_text_count * m_infoHeight}) ;
-    sf_text.setString(s);
+    sf_text.setString(text);
     window.draw(sf_text);
     m_text_count++;
 }

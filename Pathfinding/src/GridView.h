@@ -9,21 +9,21 @@
 class GridView {
    public:
     GridView(Grid& grid, BaseSearch& search, sf::Vector2f viewport_size);
-    void    draw_grid(sf::RenderWindow& ptr_window) const;
-    void    draw_search(sf::RenderWindow& ptr_window) const;
+    void    draw_grid(sf::RenderWindow& windowReference) const;
+    void    draw_search(sf::RenderWindow& windowReference) const;
 
    private:
-    void    draw_cell(sf::RenderWindow& ptr_window, const Cell& cell) const;
-    void    draw_point_on_cell(sf::RenderWindow& ptr_window, const Pos& pos, sf::Color color) const;
-    void    draw_line_cell_to_cell(sf::RenderWindow& ptr_window, const Pos& start, const Pos& end, sf::Color color) const;
+    void    draw_cell(sf::RenderWindow& windowReference, const Cell& cell) const;
+    void    draw_point_on_cell(sf::RenderWindow& windowReference, const Pos& pos, sf::Color color) const;
+    void    draw_line_cell_to_cell(sf::RenderWindow& windowReference, const Pos& start, const Pos& end, sf::Color color) const;
 
-    Grid& m_grid;
-    BaseSearch& m_search;
+    Grid& r_grid;
+    BaseSearch& r_search;
     sf::Vector2f m_viewport_size;
     float m_cell_size;
 
-    const std::map<cell_state, sf::Color> m_cellColors = {
-        {cell_state::Normal, sf::Color::White}, {cell_state::Wall, sf::Color::Black},
-        {cell_state::Start, sf::Color::Green},  {cell_state::Goal, sf::Color::Red},
+    const std::map<CellState, sf::Color> m_cellColors = {
+        {CellState::Normal, sf::Color::White}, {CellState::Wall, sf::Color::Black},
+        {CellState::Start, sf::Color::Green},  {CellState::Goal, sf::Color::Red},
     };
 };

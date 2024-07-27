@@ -21,28 +21,23 @@ class AstarSearch : public BaseSearch {
     std::vector<Pos> get_closedSet()override ;
     std::vector<Pos> get_path() override;
 
-    private:
-     struct AstarNode {
-        Pos pos;
-        int fscore;
-        int gscore;
-     };
+   private:
+    struct AstarNode {
+       Pos pos;
+       int fscore;
+       int gscore;
+    };
 
-     std::vector<AstarNode> m_openSet;
-     std::vector<Pos> m_closedSet;
-     std::map<Pos, Pos> m_cameFrom;
+    std::vector<AstarNode> m_openSet;
+    std::vector<Pos> m_closedSet;
+    std::map<Pos, Pos> m_cameFrom;
 
-     int calc_fscore(int g,Pos pos);
-     int heuristic(Pos a, Pos b);
-
-     AstarNode lowest_fscore();
-     AstarNode node_at_pos(Pos pos);
-     bool is_in_openSet(Pos pos);
-     bool is_in_closedSet(Pos pos);
-     void remove_from_openSet(Pos pos);
-
-
-
-
-     
+	// Helper functions for A* search
+    int calc_fscore(int g,Pos pos);
+    int heuristic(Pos a, Pos b);
+    AstarNode lowest_fscore();
+    AstarNode node_at_pos(Pos pos);
+    bool is_in_openSet(Pos pos);
+    bool is_in_closedSet(Pos pos);
+    void remove_from_openSet(Pos pos);
 };

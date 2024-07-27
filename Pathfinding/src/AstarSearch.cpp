@@ -1,7 +1,7 @@
 #include "AstarSearch.h"
 
 void AstarSearch::init() {
-    m_openSet.push_back({m_grid.getStart(), 0});
+    m_openSet.push_back({r_grid.getStart(), 0});
     return;
 }
 
@@ -13,7 +13,7 @@ void AstarSearch::search() {
     AstarNode Current = lowest_fscore();
 
     // 2. Check if we are at the end
-    if (Current.pos == m_grid.getEnd()) {
+    if (Current.pos == r_grid.getEnd()) {
         m_done = true;
         m_closedSet.push_back(Current.pos);
         return;
@@ -21,7 +21,7 @@ void AstarSearch::search() {
 
     // 3. Add neighbors to open set
 
-    auto neighbors = m_grid.neighbors_for_cell(Current.pos);
+    auto neighbors = r_grid.neighbors_for_cell(Current.pos);
 
     for (auto neighbor : neighbors) {
         if (is_in_closedSet(neighbor)  ) {
@@ -78,9 +78,9 @@ std::vector<Pos> AstarSearch::get_closedSet()  {
 
 std::vector<Pos> AstarSearch::get_path() {
     std::vector<Pos> path;
-    Pos current = m_grid.getEnd();
+    Pos current = r_grid.getEnd();
     path.push_back(current);
-    while (current != m_grid.getStart()) {
+    while (current != r_grid.getStart()) {
         current = m_cameFrom[current];
         path.push_back(current);
     }
@@ -88,7 +88,7 @@ std::vector<Pos> AstarSearch::get_path() {
 }
 
 int AstarSearch::calc_fscore( int g, Pos pos) {
-    return heuristic(m_grid.getEnd(), pos) + g;
+    return heuristic(r_grid.getEnd(), pos) + g;
 }
 
 int AstarSearch::heuristic(Pos a, Pos b) {

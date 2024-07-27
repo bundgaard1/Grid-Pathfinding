@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 
 struct Pos {
+	Pos() : x(0), y(0) {}
+	Pos(int x, int y) : x(x), y(y) {}
 	int x;
 	int y;
 

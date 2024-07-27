@@ -1,7 +1,7 @@
 #include "DFSSearch.h"
 
 void DFSSearch::init() {
-    m_openSet.push_back(m_grid.getStart());
+    m_openSet.push_back(r_grid.getStart());
     return;
 }
 
@@ -13,14 +13,14 @@ void DFSSearch::search() {
     auto Current = std::move(m_openSet.back()); 
     m_openSet.erase(m_openSet.end()-1);
         
-    Pos End = m_grid.getEnd(); 
+    Pos End = r_grid.getEnd(); 
     if (Current.x == End.x && Current.y == End.y) {
         m_done = true;
         m_closedSet.push_back(Current);
         return;
     }
 
-    auto neighbors = m_grid.neighbors_for_cell(Current);
+    auto neighbors = r_grid.neighbors_for_cell(Current);
 
     for (auto neighbor : neighbors) {
         if (std::find(m_closedSet.begin(), m_closedSet.end(), neighbor) != m_closedSet.end()  
@@ -53,9 +53,9 @@ std::vector<Pos> DFSSearch::get_closedSet()  {
 
 std::vector<Pos> DFSSearch::get_path() {
     std::vector<Pos> path;
-    Pos current = m_grid.getEnd();
+    Pos current = r_grid.getEnd();
     path.push_back(current);
-    while (current != m_grid.getStart()) {
+    while (current != r_grid.getStart()) {
         current = m_cameFrom[current];
         path.push_back(current);
     }
