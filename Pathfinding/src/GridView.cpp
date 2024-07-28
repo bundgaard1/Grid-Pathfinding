@@ -74,3 +74,18 @@ void GridView::draw_line_cell_to_cell(sf::RenderWindow& ptr_window, const Pos& s
 
     ptr_window.draw(line, 2, sf::Lines);
 } 
+
+
+Pos GridView::cellPosFromViewportPosition(sf::Vector2i viewportPos) const  {
+    auto grid_size = r_grid.Size();
+    std::cout << viewportPos.x << " " << viewportPos.y << std::endl;
+    int x = viewportPos.x / m_cell_size;
+    int y = viewportPos.y / m_cell_size;
+    std::cout << x << " " << y << std::endl;
+
+    if (x < 0 || x >= grid_size.x || y < 0 || y >= grid_size.y) {
+        return {-1, -1};
+    }
+
+    return {x, y};
+}

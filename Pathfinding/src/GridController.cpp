@@ -1,57 +1,41 @@
 #include "GridController.h" 
 
 GridController::GridController(Grid& grid, BaseSearch& search) : r_grid(grid), r_search(search) {
-    m_paused = true;
-    m_done = false;
-    m_win = false;
-    reset();
+    
 }
 
-void GridController::handleEvent(sf::Event& event) {
-    if (event.type == sf::Event::KeyPressed) {
-        switch (event.key.code) {
-            case (sf::Keyboard::R):
-                reset();
-                break;
-            case (sf::Keyboard::C):
-                clear();
-                break;
-            case (sf::Keyboard::Space):
+void GridController::resetSearch() {
+    srand(time(NULL));
+    r_search.reset();
+}
 
-                r_search.search();
-                break;
-            case (sf::Keyboard::T):
-                try_again();
-                break;
-            case (sf::Keyboard::D):
-                diagonal();
-                break;
-            default:
-                break;
+void GridController::clearGrid() {
+    r_search.reset();
+
+    sf::Vector2i size = r_grid.Size();
+    for (int x = 0; x < size.x; x++) {
+        for (int y = 0; y < size.y; y++) {
+            auto a = r_grid.getCell({x, y});
+            if (a->getState() != CellState::Start && a->getState() != CellState::Goal) {
+                a->setState(CellState::Normal);
+            }
         }
     }
 }
 
-
-
-void GridController::reset() {
-    srand(time(NULL));
-    return;
+void GridController::stepSearch() {
+    r_search.search();
 }
 
-void GridController::clear() {
+void GridController::setStateOfCell(Pos pos, CellState state) {
+    try {
+        r_grid.getCell(pos)->setState(state);
+    } catch (std::out_of_range& e) {
+        std::cout << "Out of range" << std::endl;
+    } 
     r_search.reset();
-}
+}  
 
-void GridController::pause() {
-    m_paused = !m_paused;
-}
-
-void GridController::try_again() {
-  return;
-}
-
-void GridController::diagonal() {
-    return;
-
+CellState GridController::getStateOfCell(Pos pos) {
+    return r_grid.getCell(pos)->getState();
 }

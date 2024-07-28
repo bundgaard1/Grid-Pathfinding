@@ -37,7 +37,9 @@ void DFSSearch::search() {
 void DFSSearch::reset() {
     m_openSet.clear();
     m_closedSet.clear();
-
+    m_cameFrom.clear();
+    m_done = false;
+    
     init();
     return;
 }

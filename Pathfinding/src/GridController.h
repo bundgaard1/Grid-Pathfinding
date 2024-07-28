@@ -6,19 +6,16 @@
 class GridController {
    public:
     GridController(Grid& grid, BaseSearch& search);
-    void reset();
-    void clear();
-    void pause();
-    void diagonal();
-    void try_again();
-    void handleEvent(sf::Event& event);
+    
+    void resetSearch();
+    void clearGrid();
+    void stepSearch();
 
-    // Other control-related methods and properties
+    void setStateOfCell(Pos pos, CellState state);
+    CellState getStateOfCell(Pos pos);
+
+
    private:
     Grid& r_grid;
     BaseSearch& r_search;
-
-    bool m_done = false;
-    bool m_win = false;
-    bool m_paused = true;
 };

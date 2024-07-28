@@ -58,6 +58,8 @@ void AstarSearch::search() {
 void AstarSearch::reset() {
     m_openSet.clear();
     m_closedSet.clear();
+    m_cameFrom.clear();
+    m_done = false;
 
     init();
     return;

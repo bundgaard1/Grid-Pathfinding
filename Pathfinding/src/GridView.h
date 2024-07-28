@@ -11,6 +11,8 @@ class GridView {
     GridView(Grid& grid, BaseSearch& search, sf::Vector2f viewport_size);
     void    draw_grid(sf::RenderWindow& windowReference) const;
     void    draw_search(sf::RenderWindow& windowReference) const;
+    
+    Pos cellPosFromViewportPosition(sf::Vector2i viewportPos) const;
 
    private:
     void    draw_cell(sf::RenderWindow& windowReference, const Cell& cell) const;

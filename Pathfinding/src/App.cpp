@@ -12,12 +12,12 @@
 void App::Run() {
     sf::RenderWindow window(sf::VideoMode(1200, 900), "Pathfinder", sf::Style::Close );
 
-    Grid grid = Grid({25, 20});
+    Grid grid = Grid({40, 30});
     
     AstarSearch search(grid);   
     GridController grid_controller(grid, search);
-    UI ui(grid_controller, {900, 0});
-    GridView view(grid, search, {900, 900});
+    GridView view(grid, search, {1200, 900});
+    UI ui(grid_controller, view, {900, 0});
 
 
     while (window.isOpen()) {
@@ -25,7 +25,7 @@ void App::Run() {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) window.close();
 
-            grid_controller.handleEvent(event);
+            ui.handleEvent(event);
         }
 
         window.clear(sf::Color(50, 50, 50));
