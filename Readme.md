@@ -1,13 +1,15 @@
 # Grid Pathfinding 
 Pathfinding in a grid-medium
 
+![Screenshot](images/Screenshot.png)
+
 ## Description
 
 This project is a small demo of pathfinding algorithms in a grid medium. The project is developed in C++ and uses the SFML library for the graphics.
 
 ## How to run (Linux)
 
-The project is only tested on Linux. 
+The project is only tested on Linux (WSL). 
 
 The project uses the SFML library, so you need to have it installed in your system. 
 
