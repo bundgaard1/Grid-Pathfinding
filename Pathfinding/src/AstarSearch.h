@@ -13,7 +13,6 @@ class AstarSearch : public BaseSearch {
     AstarSearch(Grid& grid) : BaseSearch(grid) {
         init();
     };
-    void init() override;
     void search() override; 
     void reset() override; 
 
@@ -22,6 +21,8 @@ class AstarSearch : public BaseSearch {
     std::vector<Pos> get_path() override;
 
    private:
+    void init() override;
+    
     struct AstarNode {
        Pos pos;
        int fscore;

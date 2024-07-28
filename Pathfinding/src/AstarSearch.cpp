@@ -37,6 +37,7 @@ void AstarSearch::search() {
                 continue;
             } else {
                 remove_from_openSet(neighbor);
+                
             }
         }
 

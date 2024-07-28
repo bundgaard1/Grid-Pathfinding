@@ -13,7 +13,6 @@ class DFSSearch : public BaseSearch {
     DFSSearch(Grid& grid) : BaseSearch(grid) {
         init();
     };
-    void init() override;
     void search() override; 
     void reset() override; 
 
@@ -22,11 +21,9 @@ class DFSSearch : public BaseSearch {
     std::vector<Pos> get_path() override;
 
     private:
+     void init() override;
+     
      std::vector<Pos> m_openSet;
      std::vector<Pos> m_closedSet;
      std::map<Pos, Pos> m_cameFrom;
-
-
-
-     
 };

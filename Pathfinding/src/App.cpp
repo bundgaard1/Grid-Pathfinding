@@ -12,7 +12,7 @@
 void App::Run() {
     sf::RenderWindow window(sf::VideoMode(1200, 900), "Pathfinder", sf::Style::Close );
 
-    Grid grid = Grid({25, 15});
+    Grid grid = Grid({25, 20});
     
     AstarSearch search(grid);   
     GridController grid_controller(grid, search);

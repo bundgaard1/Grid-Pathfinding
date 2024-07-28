@@ -8,7 +8,6 @@
 class BaseSearch {
     public:
         BaseSearch(Grid& grid) : r_grid(grid) {};
-        virtual void init() = 0;
         virtual void search() = 0; 
         virtual void reset() = 0; 
         bool is_done() {
@@ -20,6 +19,7 @@ class BaseSearch {
         virtual std::vector<Pos> get_path() = 0;
     
     protected:
+        virtual void init() = 0;
         Grid& r_grid;
         bool m_done = false;
 };

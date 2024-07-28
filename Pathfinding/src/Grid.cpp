@@ -10,7 +10,7 @@ Grid::Grid(sf::Vector2i gridSize) : m_diagonals(false) {
     srand(time(NULL));
 
     // Cells
-    generate_cells(0.1);
+    generate_cells(0.2);
 
     // Start and end
     m_start = {0,0};
