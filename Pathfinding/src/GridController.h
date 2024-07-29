@@ -14,6 +14,12 @@ class GridController {
     void setStateOfCell(Pos pos, CellState state);
     CellState getStateOfCell(Pos pos);
 
+    void setStart(Pos pos);
+    void setEnd(Pos pos);
+
+    Pos getStart() { return r_grid.getStart(); }
+    Pos getEnd() { return r_grid.getEnd(); }
+
 
    private:
     Grid& r_grid;

@@ -26,13 +26,18 @@ class UI {
     
     // Event handling
     void handleMouseEvent(sf::Event& event);
-    void changeStateOfCellOnMouse(Pos pos);
+    void changeStateOfCell(Pos pos);
+
+    enum class StateChanging { Normal, Wall, Goal, Start };
 
     struct MouseState {
         bool isPressed = false;
         Pos lastPos;
-        CellState stateChanging;
+        StateChanging stateChanging;
     } m_mouseState;
+
+    
+    StateChanging ChangingStateFromCellState();
 
     // References 
     GridController& r_gridController;

@@ -15,7 +15,7 @@ class GridView {
     Pos cellPosFromViewportPosition(sf::Vector2i viewportPos) const;
 
    private:
-    void    draw_cell(sf::RenderWindow& windowReference, const Cell& cell) const;
+    void    draw_cell(sf::RenderWindow& windowReference, Pos pos, sf::Color color) const;
     void    draw_point_on_cell(sf::RenderWindow& windowReference, const Pos& pos, sf::Color color) const;
     void    draw_line_cell_to_cell(sf::RenderWindow& windowReference, const Pos& start, const Pos& end, sf::Color color) const;
 
@@ -26,6 +26,5 @@ class GridView {
 
     const std::map<CellState, sf::Color> m_cellColors = {
         {CellState::Normal, sf::Color::White}, {CellState::Wall, sf::Color::Black},
-        {CellState::Start, sf::Color::Green},  {CellState::Goal, sf::Color::Red},
     };
 };

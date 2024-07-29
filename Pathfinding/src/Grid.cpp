@@ -15,19 +15,53 @@ Grid::Grid(sf::Vector2i gridSize) : m_diagonals(false) {
     // Start and end
     m_start = {0,0};
     m_end = {m_size.cols - 1, m_size.rows - 1};
-    getCell(m_start)->setState(CellState::Start);
-    getCell(m_end)->setState(CellState::Goal);
 }
 
 sf::Vector2i Grid::Size() { return sf::Vector2i(m_size.cols, m_size.rows); }
 
 Cell* Grid::getCell(Pos p) {
-    if (p.x < 0 || p.x >= m_size.cols || p.y < 0 || p.y >= m_size.rows) {
-        throw std::out_of_range("Index out of bounds");
+    if (!cell_is_valid(p) ) {
+        throw std::out_of_range("Index out of bounds: (" + std::to_string(p.x) + ", " + std::to_string(p.y) + ") < (" + std::to_string(m_size.cols) + ", " + std::to_string(m_size.rows) + ")");
     }
 
     return &m_cells[p.x][p.y];
 }
+
+CellState Grid::getStateOfCell(Pos pos) {
+    try {
+        return getCell(pos)->getState();
+    } catch (std::out_of_range& e) {
+        std::cout << e.what() << std::endl;
+    }
+    return CellState::Normal;
+}
+
+void Grid::setStateOfCell(Pos pos, CellState state) {
+    if (pos == m_start || pos == m_end) {
+        return;
+    }
+    try {
+        getCell(pos)->setState(state);
+    } catch (std::out_of_range& e) {
+        std::cout << "Out of range, setter" << std::endl;
+    } 
+}
+
+void Grid::setStart(Pos p) {
+    if (getStateOfCell(p) == CellState::Wall) {
+        return;
+    }
+    
+    m_start = p;
+}
+
+void Grid::setEnd(Pos p) {
+    if (getStateOfCell(p) == CellState::Wall) {
+        return;
+    }
+    m_end = p;
+}
+
 
 std::vector<Pos> Grid::neighbors_for_cell(Pos cell) {
     std::vector<Pos> neighbors;

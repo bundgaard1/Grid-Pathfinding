@@ -11,10 +11,14 @@ void GridView::draw_grid(sf::RenderWindow& ptr_window) const  {
     
     for (int i = 0; i < grid_size.x; i++) {
         for (int j = 0; j < grid_size.y; j++) {
-            const Cell* curr = r_grid.getCell({i, j});
-            draw_cell(ptr_window, *curr);
+            CellState currState = r_grid.getStateOfCell({i, j});
+            draw_cell(ptr_window, {i,j}, m_cellColors.at(currState));
         }
     }
+
+    draw_cell(ptr_window, r_grid.getStart(), sf::Color::Green);
+    draw_cell(ptr_window, r_grid.getEnd()  , sf::Color::Red);
+
 }
 
 void GridView::draw_search(sf::RenderWindow& ptr_window) const  {
@@ -38,22 +42,20 @@ void GridView::draw_search(sf::RenderWindow& ptr_window) const  {
     
 }
 
-void GridView::draw_cell(sf::RenderWindow& ptr_window, const Cell& cell) const  {
-    CellState state = cell.getState();
-    sf::Color col = m_cellColors.at(state);
+void GridView::draw_cell(sf::RenderWindow& ptr_window, Pos pos, sf::Color color) const  {
 
     sf::RectangleShape rectCell({m_cell_size - 1, m_cell_size - 1});
 
     rectCell.setOutlineThickness(1);
     rectCell.setOutlineColor(sf::Color::Black);
-    rectCell.setFillColor(col);
-    rectCell.setPosition(sf::Vector2f(cell.getPos().x *m_cell_size + 1, cell.getPos().y * m_cell_size + 1));
+    rectCell.setFillColor(color);
+    rectCell.setPosition(sf::Vector2f(pos.x *m_cell_size + 1, pos.y * m_cell_size + 1));
 
     ptr_window.draw(rectCell);
 }
 
 void GridView::draw_point_on_cell(sf::RenderWindow& ptr_window, const Pos& pos, sf::Color color) const  {
-    float circle_radius = m_cell_size /6;
+    float circle_radius = m_cell_size /5;
     sf::CircleShape circle(circle_radius);
 
     circle.setFillColor(color);
@@ -78,10 +80,9 @@ void GridView::draw_line_cell_to_cell(sf::RenderWindow& ptr_window, const Pos& s
 
 Pos GridView::cellPosFromViewportPosition(sf::Vector2i viewportPos) const  {
     auto grid_size = r_grid.Size();
-    std::cout << viewportPos.x << " " << viewportPos.y << std::endl;
+
     int x = viewportPos.x / m_cell_size;
     int y = viewportPos.y / m_cell_size;
-    std::cout << x << " " << y << std::endl;
 
     if (x < 0 || x >= grid_size.x || y < 0 || y >= grid_size.y) {
         return {-1, -1};

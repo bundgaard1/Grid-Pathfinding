@@ -5,7 +5,7 @@
 #include <vector>
 #include "Pos.h"
 
-enum class CellState { Normal, Wall, Start, Goal} ;
+enum class CellState { Normal, Wall} ;
 
 class Cell {
    public:

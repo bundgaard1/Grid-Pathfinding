@@ -13,8 +13,6 @@ UI::UI(GridController& gridCont,  GridView& gridView,  sf::Vector2f pos) : r_gri
     m_infoHeight = 40.0f;
     m_text_count = 0;
 
-    
-
     load_font("resources/fonts/Raleway-Regular.ttf");
 }
 
@@ -37,8 +35,8 @@ void UI::handleEvent(sf::Event& event) {
     
     if (event.type == sf::Event::MouseButtonPressed) {
         m_mouseState.isPressed = true;
-        m_mouseState.stateChanging = r_gridController.getStateOfCell(m_mouseState.lastPos);
-        changeStateOfCellOnMouse(m_mouseState.lastPos);
+        m_mouseState.stateChanging = ChangingStateFromCellState();
+        changeStateOfCell(m_mouseState.lastPos);
     }
 
     if (event.type == sf::Event::MouseButtonReleased) {
@@ -47,6 +45,11 @@ void UI::handleEvent(sf::Event& event) {
 
     
     if (event.type == sf::Event::MouseMoved) {
+        if (event.mouseMove.x < 0 || event.mouseMove.y < 0) {
+            m_mouseState.isPressed = false;
+            return;
+        }
+
         if (m_mouseState.isPressed) {
             handleMouseEvent(event);
         }
@@ -57,27 +60,23 @@ void UI::handleEvent(sf::Event& event) {
 void UI::handleMouseEvent(sf::Event& event) {
     Pos pos = r_view.cellPosFromViewportPosition({event.mouseMove.x, event.mouseMove.y});
     if (pos != m_mouseState.lastPos) {
-       changeStateOfCellOnMouse(pos);
+       changeStateOfCell(pos);
     }
 }
 
-void UI::changeStateOfCellOnMouse(Pos pos) {
+void UI::changeStateOfCell(Pos pos) {
     switch (m_mouseState.stateChanging) {
-        case CellState::Normal:
+        case StateChanging::Normal: 
             r_gridController.setStateOfCell(pos, CellState::Wall);
             break;
-        case CellState::Wall:
+        case StateChanging::Wall: 
             r_gridController.setStateOfCell(pos, CellState::Normal);
             break;
-        case CellState::Goal:
-            r_gridController.setStateOfCell(m_mouseState.lastPos, CellState::Normal);
-            r_gridController.setStateOfCell(pos, CellState::Goal);
-            r_gridController.resetSearch();
+        case StateChanging::Start: 
+            r_gridController.setStart(pos);
             break;
-        case CellState::Start:
-            r_gridController.setStateOfCell(m_mouseState.lastPos, CellState::Normal);
-            r_gridController.setStateOfCell(pos, CellState::Start);
-            r_gridController.resetSearch();
+        case StateChanging::Goal: 
+            r_gridController.setEnd(pos);
             break;
         default:
             break;
@@ -121,4 +120,23 @@ bool UI::load_font(const std::string& fontPath) {
         return false;
     }
     return true;
+}
+
+UI::StateChanging UI::ChangingStateFromCellState() {
+    if (m_mouseState.lastPos == r_gridController.getStart()) {
+        return StateChanging::Start;
+    }
+    
+    if (m_mouseState.lastPos == r_gridController.getEnd()) {
+        return StateChanging::Goal;
+    }
+    switch (r_gridController.getStateOfCell(m_mouseState.lastPos)) {
+        case CellState::Normal:
+            return StateChanging::Normal;
+        case CellState::Wall:
+            return StateChanging::Wall;
+        default:
+            break;
+    }
+    return StateChanging::Normal;
 }

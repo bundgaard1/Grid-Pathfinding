@@ -14,14 +14,23 @@ class Grid {
    public:
     Grid(sf::Vector2i gridSize);
     sf::Vector2i Size();
-    Cell* getCell(Pos p);
+
+    CellState getStateOfCell(Pos pos);
+    void setStateOfCell(Pos pos, CellState state);
+    
+    void setStart(Pos p);
+    void setEnd(Pos p);
+
     Pos getStart() { return m_start; }
     Pos getEnd() { return m_end; }
+
     std::vector<Pos> neighbors_for_cell(Pos cell);
 
    private:
     bool cell_is_valid(Pos p);
     void generate_cells(float cell_wall_chance);
+
+    Cell* getCell(Pos p);
 
     struct Size {
         int cols;
